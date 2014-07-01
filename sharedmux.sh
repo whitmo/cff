@@ -2,8 +2,7 @@
 
 set -e
 
-/usr/sbin/sshd -D &
-tmux -S /tmp/pair_socket new -s shared &
+tmux -S /tmp/pair_socket new -ds shared
 chown ubuntu:ubuntu /tmp/pair_socket
-jobs
-echo "<<--- starwipe and out --->>"
+
+/usr/sbin/sshd -D

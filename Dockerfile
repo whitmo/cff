@@ -36,9 +36,10 @@ RUN chown -R ubuntu:ubuntu /home/ubuntu/.ssh/
 
 RUN mkdir /var/run/sshd
 RUN echo 'ubuntu:screencast' |chpasswd
+RUN echo "alias pairup='tmux -S /tmp/pair_socket a -t shared'" >> /home/ubuntu/.bashrc
 
 ADD ./sharedmux.sh /opt/bin/sharedmux.sh
 
 EXPOSE 22 6000
 #CMD /opt/bin/sharedmux.sh
-CMD ["/usr/sbin/sshd", "-D"]
+CMD ["bash", "/opt/bin/sharedmux.sh"]
