@@ -14,10 +14,10 @@ RUN apt-get install -y juju
 RUN apt-get install -y -q build-essential autotools-dev automake pkg-config
 
 # # Disables password authentication
-# RUN sed -i -e 's/^#PasswordAuthentication\syes/PasswordAuthentication no/' /etc/ssh/sshd_config
+RUN sed -i -e 's/^#PasswordAuthentication\syes/PasswordAuthentication no/' /etc/ssh/sshd_config
 
 # pam_loginuid is disabled
-#RUN sed -i -e 's/^\(session\s\+required\s\+pam_loginuid.so$\)/#\1/' /etc/pam.d/sshd
+RUN sed -i -e 's/^\(session\s\+required\s\+pam_loginuid.so$\)/#\1/' /etc/pam.d/sshd
 
 RUN mkdir -p /opt
 RUN mkdir -p /opt/bin
