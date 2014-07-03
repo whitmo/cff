@@ -1,0 +1,35 @@
+- hosts: all
+  vars:
+    docker: /usr/local/bin/docker
+  tasks:
+    - name: Install required packages.
+      apt: pkg={{ item }} state=latest update_cache=yes
+      with_items:
+        - docker.io
+      tags:
+        - install
+        - upgrade-charm
+
+    - name: link docker binary
+      sudo: true
+      command: ln -sf /usr/bin/docker.io creates={{docker}}
+      tags:
+        - install
+        - upgrade-charm
+
+    - name: build container
+      command: docker build --rm -t cfpbj ./ chdir={{charm_dir}}/docker
+      tags:
+        - install
+        - upgrade-charm
+
+    - name: Start ssh
+      command: docker run -d -P --name devbox cfpbj
+      tags:
+        - start
+        - config-changed
+
+    - name: Stop service
+      command: docker stop devbox
+      tags:
+        - stop

@@ -8,7 +8,7 @@ sys.path.insert(0, os.path.join(os.environ['CHARM_DIR'], 'lib'))
 import charmhelpers.contrib.ansible
 
 hooks = charmhelpers.contrib.ansible.AnsibleHooks(
-    playbook_path='playbooks/site.yaml',
+    playbook_path='praybook.yaml',
     default_hooks=[
         'start',
         'stop',

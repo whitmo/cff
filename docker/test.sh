@@ -1,3 +1,4 @@
+#!/bin/bash
 sudo docker stop test_sshd && sudo docker rm test_sshd
 set -e
 sudo docker build --rm -t cfpbj ./
